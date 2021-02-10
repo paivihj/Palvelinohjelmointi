@@ -10,12 +10,16 @@
 <body>
 	<h2 th:text="'Add book'"></h2>
 	
-	<form action="#" th:action="@{save}" th:object="${book}" method="post">
+	<form action="#" th:action="@{save}" th:object="${book}" method="post" class="form-control">
         <p>Author: <input type="text" th:field="*{author}" /></p>
         <p>Title: <input type="text" th:field="*{title}" /></p>
         <p>ISBN: <input type="text" th:field="*{isbn}" /></p>
         <p>Year: <input type="text" th:field="*{year}" /></p>
         <p>Price: <input type="text" th:field="*{price}" /></p>
+        <label for="clist">Category: </label>
+			 <select id="clist" th:field="*{category}">
+       			<option th:each="category: ${categories}" th:value="${category.catId}" th:text="${category.name}"></option>
+    		</select>
         <p><input type="submit" value="Submit" /></p>
 	</form>
 </body>

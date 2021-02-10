@@ -10,11 +10,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import fi.pju.Bookstore.domain.Book;
 import fi.pju.Bookstore.domain.BookRepository;
+import fi.pju.Bookstore.domain.CategoryRepository;
 
 @Controller
 public class BookController {
 	@Autowired
 	private BookRepository repository;
+	
+	@Autowired
+	private CategoryRepository catRepository;
 	
 	@RequestMapping("/booklist")
 	public String books(Model model) {
@@ -28,6 +32,7 @@ public class BookController {
 	public String newBook(Model model) {
 		
 		model.addAttribute("book", new Book());
+		model.addAttribute("categories", catRepository.findAll());
 		return "addbook";
 	}
 	
@@ -47,6 +52,7 @@ public class BookController {
 	public String editBook(@PathVariable("id") Long bookId, Model model) {
 		Book book = repository.findById(bookId).get();
 		model.addAttribute("book", book);
+		model.addAttribute("categories", catRepository.findAll());
 		return "editbook";
 	}
 	
