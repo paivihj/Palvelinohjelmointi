@@ -1,7 +1,5 @@
 package fi.pju.Bookstore.web;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -47,15 +45,9 @@ public class BookController {
 	
 	@GetMapping("/edit/{id}")
 	public String editBook(@PathVariable("id") Long bookId, Model model) {
-		Optional<Book> book = repository.findById(bookId);
+		Book book = repository.findById(bookId).get();
 		model.addAttribute("book", book);
 		return "editbook";
-	}
-	
-	@PostMapping("/update/{id}")
-	public String saveEditedBook(@PathVariable("id") Long bookId, Book book) {
-		repository.save(book);
-		return "redirect:../booklist";
 	}
 	
 }
