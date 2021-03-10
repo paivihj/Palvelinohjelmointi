@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
  <link type="text/css"rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
 
 <head>
@@ -8,6 +9,8 @@
 </head>
 
 <body>
+<a sec:authorize="isAuthenticated()" th:href="@{/logout}">Logout</a>
+<a th:href="@{/login}">Log in</a>
 <h2 th:text="'Books'"></h2>
 <table class="table table-striped">
 	<thead>
@@ -26,11 +29,11 @@
     		<td th:text="${book.category.getName}"></td>
     		<td th:text="${book.year}"></td>
     		<td th:text="${book.price}"></td>
-    		<td><a th:href="@{/delete/{id}(id=${book.id})}">Delete</a></td>
-    		<td><a th:href="@{/edit/{id}(id=${book.id})}">Edit</a></td>
+    		<td sec:authorize="isAuthenticated()"><a th:href="@{/delete/{id}(id=${book.id})}">Delete</a></td>
+    		<td sec:authorize="isAuthenticated()"><a th:href="@{/edit/{id}(id=${book.id})}">Edit</a></td>
 		</tr>
 	</tbody>
 </table>
-<a href="/addbook">Add book</a>	
+<a sec:authorize="isAuthenticated()" href="/addbook">Add book</a>	
 </body>
 </html>

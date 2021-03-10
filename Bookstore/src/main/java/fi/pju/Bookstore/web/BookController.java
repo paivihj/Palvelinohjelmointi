@@ -1,6 +1,7 @@
 package fi.pju.Bookstore.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,6 +29,11 @@ public class BookController {
 		return "booklist";
 	}
 	
+	@RequestMapping("/")
+	public String home() {
+		return "home";
+	}
+	
 	@GetMapping("/addbook")
 	public String newBook(Model model) {
 		
@@ -43,6 +49,7 @@ public class BookController {
 	}
 	
 	@GetMapping("/delete/{id}")
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public String deleteBook(@PathVariable("id") Long bookId) {
 		repository.deleteById(bookId);
 		return "redirect:../booklist";
