@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+ <link type="text/css"rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+
+<head>
+	<title>Bike Shop</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+<h2 th:text="'Add bikes'"></h2>
+	
+	<form action="#" th:action="@{saveBike}" th:object="${singleBike}" method="post" class="form-control">
+        <label for="clist">Bike: </label>
+			 <select id="clist" th:field="*{bike}">
+       			<option th:each="bike: ${bikes}" th:value="${bike.id}" th:text="${bike.brand} + ' ' + ${bike.model}"></option>
+    		</select>
+    	<p>Size: <input type="text" th:field="*{size}" /></p> 
+        <p><input type="submit" value="Submit" /></p>
+	</form>	
+</body>
+</html>

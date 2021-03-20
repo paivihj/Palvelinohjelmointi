@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+ <link type="text/css"rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+
+<head>
+	<title>Order</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+<h2 th:text="'Give customer information'"></h2>
+	
+	<form action="#" th:action="@{saveCustomer}" th:object="${newCustomer}" method="post" class="form-control">
+        <p>Firstname: <input type="text" th:field="*{firstName}" /></p>
+        <p>Lastname: <input type="text" th:field="*{lastName}" /></p>      
+        <p>Credit Card Number: <input type="text" th:field="*{creditCardNo}" /></p>
+        <p>Address: <input type="text" th:field="*{address}" /></p>
+        <p>Post Number: <input type="text" th:field="*{postNo}" /></p>
+        <p>Post Office: <input type="text" th:field="*{postOff}" /></p>
+        <p><input type="submit" value="Submit" /></p>
+	</form>	
+</body>
+</html>

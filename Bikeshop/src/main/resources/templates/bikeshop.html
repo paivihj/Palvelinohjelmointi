@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+ <link type="text/css"rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+
+<head>
+	<title>Bike Shop</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+<a sec:authorize="isAuthenticated()" th:href="@{/logout}">Logout</a>
+<a th:href="@{/login}">Log in</a>
+<br>
+<a href="/customerinfo">Start order</a>
+<br>
+<h2 th:text="'Bike Models'"></h2>
+<table class="table table-striped">
+	<thead>
+        <tr>
+            <th> Brand </th>
+            <th> Model </th>
+            <th> Price </th>
+            <th> Description </th>
+        </tr>
+    </thead>
+    <tbody>
+		<tr th:each="bike: ${bikes}">
+			<td th:text="${bike.brand}"></td>
+    		<td th:text="${bike.model}"></td>
+    		<td th:text="${bike.price}"></td>
+    		<td th:text="${bike.description}"></td>
+		</tr>
+	</tbody>
+</table>
+<a href="/addbike">Add new bike</a>	
+
+<h2 th:text="'Bikes by size'"></h2>
+<table class="table table-striped">
+	<thead>
+        <tr>
+            <th> Bike </th>
+            <th> Size </th>
+        </tr>
+    </thead>
+    <tbody>
+		<tr th:each="bike: ${singleBikes}">
+			<td th:text="${bike.bike.brand} + ' ' + ${bike.bike.model}"></td>
+    		<td th:text="${bike.size}"></td>
+		</tr>
+	</tbody>
+</table>
+<a href="/addbikes">Add bikes</a>	
+</body>
+</html>
