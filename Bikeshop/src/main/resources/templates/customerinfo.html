@@ -10,7 +10,7 @@
 <body>
 <h2 th:text="'Give customer information'"></h2>
 	
-	<form action="#" th:action="@{saveCustomer}" th:object="${newCustomer}" method="post" class="form-control">
+	<form action="#" th:action="@{/saveCustomer}" th:object="${newCustomer}" method="post" class="form-control">
         <p>Firstname: <input type="text" th:field="*{firstName}" /></p>
         <p>Lastname: <input type="text" th:field="*{lastName}" /></p>      
         <p>Credit Card Number: <input type="text" th:field="*{creditCardNo}" /></p>

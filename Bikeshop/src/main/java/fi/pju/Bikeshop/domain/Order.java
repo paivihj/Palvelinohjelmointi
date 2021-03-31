@@ -22,7 +22,7 @@ public class Order {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private long orderId;
+	private long order_id;
 	private double discount;
 	private LocalDate orderDate;
 	
@@ -46,7 +46,7 @@ public class Order {
 	}
 
 	public long getId() {
-		return orderId;
+		return order_id;
 	}
 
 	public double getDiscount() {
@@ -83,7 +83,7 @@ public class Order {
 
 	@Override
 	public String toString() {
-		return "Order [orderId=" + orderId + ", discount=" + discount + ", orderDate=" + orderDate + "]";
+		return "Order [orderId=" + order_id + ", discount=" + discount + ", orderDate=" + orderDate + "]";
 	}
 	
 	

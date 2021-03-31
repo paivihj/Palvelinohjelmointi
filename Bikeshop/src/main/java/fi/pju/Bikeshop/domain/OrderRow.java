@@ -19,7 +19,7 @@ public class OrderRow {
 	private long rowId;
 	
 	@ManyToOne
-	@JoinColumn(name = "orderId")
+	@JoinColumn(name = "order_id")
 	@JsonManagedReference
 	private Order order;
 	

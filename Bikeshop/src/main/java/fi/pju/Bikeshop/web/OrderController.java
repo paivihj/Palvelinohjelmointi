@@ -1,6 +1,8 @@
 package fi.pju.Bikeshop.web;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
@@ -24,6 +26,7 @@ import fi.pju.Bikeshop.domain.OrderList;
 import fi.pju.Bikeshop.domain.OrderRepository;
 import fi.pju.Bikeshop.domain.OrderRow;
 import fi.pju.Bikeshop.domain.OrderRowRepository;
+import fi.pju.Bikeshop.domain.SingleBike;
 import fi.pju.Bikeshop.domain.SingleBikeRepository;
 
 @Controller
@@ -66,8 +69,8 @@ public class OrderController {
 		return new OrderList();
 	}
 	
-	@GetMapping("/order/{orderId}")
-	public String getBikes(Model model, @PathVariable("orderId") Long orderId) {
+	@GetMapping("/order/{order_id}")
+	public String getBikes(Model model, @PathVariable("order_id") Long orderId) {
 		
 		System.out.println(orderId);
 		
@@ -76,9 +79,11 @@ public class OrderController {
 		
 		System.out.println(order.toString());
 		
-		model.addAttribute("bikes", bikeRepo.findAll());
-		model.addAttribute("singleBikes", sBikeRepo.findAll());
-		model.addAttribute("orderRow", new OrderRow());
+		OrderRow row = new OrderRow();
+		row.setOrder(order);
+		
+		model.addAttribute("singleBikes", sBikeRepo.findFree());
+		model.addAttribute("orderRow", row);
 		
 		return "order";
 	}

@@ -10,7 +10,7 @@
 <body>
 <h2 th:text="'Order bikes'"></h2>
 	
-	<form action="#" th:action="@{saveOrder}" th:object="${orderRow}" method="post">
+	<form action="#" th:action="@{/saveOrder}" th:object="${orderRow}" method="post">
         <label for="clist">Bike: </label>
 			 <select id="clist" th:field="*{bike}">
        			<option th:each="bike: ${singleBikes}" th:value="${bike.id}" th:text="${bike.bike.brand} + ' ' + ${bike.bike.model} + ' ' + ${bike.size}"></option>
