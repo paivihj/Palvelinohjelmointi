@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+ <link type="text/css"rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+
+<head>
+	<title>Bike Shop</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+<a th:href="@{/logout}">Logout</a>	
+<a th:href="@{/bikeshop}">Back to bikeshop</a>
+
+<h2 th:text="'Orders'"></h2>
+<table class="table table-striped">
+	<thead>
+        <tr>
+            <th> Customer </th>
+            <th> Bike </th>
+            <th> Order Date </th>
+        </tr>
+    </thead>
+    <tbody>
+		<tr th:each="order: ${orders}">
+			<td th:text="${order.order.customer.firstName} + ' ' + ${order.order.customer.lastName}"></td>
+			<td th:text="${order.bike.bike.brand} + ' ' + ${order.bike.bike.model} + ' ' + ${order.bike.size}"></td>
+			<td th:text="${order.order.orderDate}"></td>
+		</tr>
+	</tbody>
+</table>
+</body>
+</html>

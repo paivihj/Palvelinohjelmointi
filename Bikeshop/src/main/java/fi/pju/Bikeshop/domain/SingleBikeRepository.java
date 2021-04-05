@@ -16,4 +16,3 @@ public interface SingleBikeRepository extends CrudRepository<SingleBike, Long> {
 
 }
 
-//SingleBike=(SELECT DISTINCT id,size FROM SingleBike)

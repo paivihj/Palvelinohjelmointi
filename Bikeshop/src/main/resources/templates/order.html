@@ -8,7 +8,7 @@
 </head>
 
 <body>
-<h2 th:text="'Order bikes'"></h2>
+<h2 th:text="'Select bike'"></h2>
 	
 	<form action="#" th:action="@{/saveOrder}" th:object="${orderRow}" method="post">
         <label for="clist">Bike: </label>
@@ -16,7 +16,7 @@
        			<option th:each="bike: ${singleBikes}" th:value="${bike.id}" th:text="${bike.bike.brand} + ' ' + ${bike.bike.model} + ' ' + ${bike.size}"></option>
     		</select>
     		<input type="hidden" th:field="*{order}" th:value="${thisOrder}"/>
-        <p><input type="submit" value="Submit" /></p>
+        <p><input type="submit" value="Submit order" /></p>
 	</form>	
 </body>
 </html>

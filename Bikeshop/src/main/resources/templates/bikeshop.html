@@ -12,7 +12,9 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <a sec:authorize="isAuthenticated()" th:href="@{/logout}">Logout</a>
 <a th:href="@{/login}">Log in</a>
 <br>
-<a href="/customerinfo">Start order</a>
+<a sec:authorize="isAuthenticated()" href="/customerinfo">Start order</a>
+<br>
+<a sec:authorize="hasAuthority('ADMIN')" href="/orders">See orders</a>
 <br>
 <h2 th:text="'Bike Models'"></h2>
 <table class="table table-striped">
@@ -30,10 +32,11 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
     		<td th:text="${bike.model}"></td>
     		<td th:text="${bike.price}"></td>
     		<td th:text="${bike.description}"></td>
+    		<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/edit/{bikeId}(bikeId=${bike.bikeId})}">Edit</a></td>
 		</tr>
 	</tbody>
 </table>
-<a href="/addbike">Add new bike</a>	
+<a sec:authorize="hasAuthority('ADMIN')" href="/addbike">Add new bike</a>	
 
 <h2 th:text="'Bikes by size'"></h2>
 <table class="table table-striped">
@@ -47,9 +50,10 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 		<tr th:each="bike: ${singleBikes}">
 			<td th:text="${bike.bike.brand} + ' ' + ${bike.bike.model}"></td>
     		<td th:text="${bike.size}"></td>
+    		<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/delete/{id}(id=${bike.id})}">Delete</a></td>
 		</tr>
 	</tbody>
 </table>
-<a href="/addbikes">Add bikes</a>	
+<a sec:authorize="hasAuthority('ADMIN')" href="/addbikes">Add bikes</a>	
 </body>
 </html>

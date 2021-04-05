@@ -5,11 +5,13 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import fi.pju.Bikeshop.domain.Bike;
 import fi.pju.Bikeshop.domain.BikeRepository;
+import fi.pju.Bikeshop.domain.OrderRowRepository;
 import fi.pju.Bikeshop.domain.SingleBike;
 import fi.pju.Bikeshop.domain.SingleBikeRepository;
 
@@ -62,6 +64,21 @@ public class BikeController {
 		sBikeRepo.save(singleBike);
 		
 		return "redirect:bikeshop";
+	}
+	
+	@GetMapping("/delete/{id}")
+	@PreAuthorize("hasAuthority('ADMIN')")
+	public String deleteBike(@PathVariable("id") Long id) {
+		sBikeRepo.deleteById(id);
+		return "redirect:../bikeshop";
+	}
+	
+	@GetMapping("/edit/{bikeId}")
+	@PreAuthorize("hasAuthority('ADMIN')")
+	public String editBike(@PathVariable("bikeId") Long bikeId, Model model) {
+		Bike bike = bikeRepo.findById(bikeId).get();
+		model.addAttribute("bike", bike);
+		return "editbike";
 	}
 	
 }

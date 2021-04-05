@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import fi.pju.Bikeshop.domain.Bike;
@@ -48,7 +49,17 @@ public class OrderController {
 	@Autowired
 	private CustomerRepository custRepo;
 	
+	@RequestMapping("/orders")
+	@PreAuthorize("hasAuthority('ADMIN')")
+	public String bikes(Model model) {
+		
+		model.addAttribute("orders", rowRepo.findAll());
+	
+		return "orders";
+	}
+	
 	@GetMapping("/customerinfo")
+	@PreAuthorize("hasAnyAuthority('ADMIN', 'user')")
 	public String customerInfo(Model model) {
 		
 		model.addAttribute("newCustomer", new Customer());
@@ -89,7 +100,7 @@ public class OrderController {
 	}
 	
 	@PostMapping("saveOrder")
-	//@PreAuthorize("hasAuthority('ADMIN')")
+	@PreAuthorize("hasAnyAuthority('ADMIN', 'user')")
 	public String saveOrderRow(OrderRow orderrow) {
 		rowRepo.save(orderrow);
 		return "redirect:bikeshop";

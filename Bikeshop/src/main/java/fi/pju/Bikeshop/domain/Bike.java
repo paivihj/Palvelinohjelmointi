@@ -35,8 +35,12 @@ public class Bike {
 		this.description = description;
 	}
 
-	public long getId() {
+	public long getBikeId() {
 		return bikeId;
+	}
+
+	public void setBikeId(long bikeId) {
+		this.bikeId = bikeId;
 	}
 
 	public String getBrand() {
