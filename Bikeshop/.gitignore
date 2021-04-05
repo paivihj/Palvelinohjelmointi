@@ -31,3 +31,8 @@ build/
 
 ### VS Code ###
 .vscode/
+
+*.xlsx
+*.xls
+application.properties
+Putty_MariaDB.txt
