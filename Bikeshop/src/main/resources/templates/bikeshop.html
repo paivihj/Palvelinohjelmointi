@@ -9,6 +9,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 </head>
 
 <body>
+<h1>Welcome to the awesome Bikeshop!</h1>
 <a sec:authorize="isAuthenticated()" th:href="@{/logout}">Logout</a>
 <a th:href="@{/login}">Log in</a>
 <br>

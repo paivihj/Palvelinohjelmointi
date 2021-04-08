@@ -18,24 +18,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import fi.pju.Bikeshop.domain.Bike;
 import fi.pju.Bikeshop.domain.BikeRepository;
 import fi.pju.Bikeshop.domain.Customer;
 import fi.pju.Bikeshop.domain.CustomerRepository;
 import fi.pju.Bikeshop.domain.Order;
-import fi.pju.Bikeshop.domain.OrderList;
 import fi.pju.Bikeshop.domain.OrderRepository;
 import fi.pju.Bikeshop.domain.OrderRow;
 import fi.pju.Bikeshop.domain.OrderRowRepository;
-import fi.pju.Bikeshop.domain.SingleBike;
 import fi.pju.Bikeshop.domain.SingleBikeRepository;
 
 @Controller
 @SessionAttributes("orderAttribute")
 public class OrderController {
-	
-	@Autowired 
-	private BikeRepository bikeRepo;
 	
 	@Autowired
 	private SingleBikeRepository sBikeRepo;
@@ -73,11 +67,6 @@ public class OrderController {
 		Order order = new Order(0, LocalDate.now(), customer);
 		orderRepo.save(order);
 		return "redirect:order/" + order.getId();
-	}
-	
-	@ModelAttribute("orderAttribute")
-	public OrderList orderAttribute() {
-		return new OrderList();
 	}
 	
 	@GetMapping("/order/{order_id}")
